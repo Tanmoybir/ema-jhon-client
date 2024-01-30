@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 const Sidebar = () => {
     const navLinks = [
         { id: 1, name: "HOME", link: '/' },
-        { id: 1, name: "ABOUT", link: '/about' },
-        { id: 1, name: "CONTACT", link: '/contact' },
+        { id: 2, name: "ABOUT", link: '/about' },
+        { id: 3, name: "CONTACT", link: '/contact' },
     ]
     return (
         <div className="p-4 w-80 min-h-full bg-base-200">

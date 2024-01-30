@@ -1,15 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
     const [name, setName] = useState('')
     const [image, setImage] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const { createUser, user } = useAuth()
 
-    const handleRegister = (e) => {
+
+    console.log(user);
+    const handleRegister = async (e) => {
         e.preventDefault()
-        console.log(name, image, email, password);
+        try {
+            await createUser(email, password)
+            console.log('User Created');
+        } catch (err) {
+            console.log(err);
+        }
     }
     return (
         <div className="max-w-[800px] mx-auto my-12 p-6 bg-white shadow-md sm:px-8 sm:py-10 lg:px-12 lg:py-16">

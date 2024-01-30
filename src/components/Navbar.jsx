@@ -1,12 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "./util/Container";
+import useAuth from "../hooks/useAuth";
 
 
 const Navbar = () => {
+    const { user, logOut } = useAuth()
     const navLinks = [
         { id: 1, name: "HOME", link: '/' },
-        { id: 1, name: "ABOUT", link: '/about' },
-        { id: 1, name: "CONTACT", link: '/contact' },
+        { id: 2, name: "ABOUT", link: '/about' },
+        { id: 3, name: "CONTACT", link: '/contact' },
     ]
     return (
         <Container>
@@ -38,12 +40,34 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="">
-                    <Link to={'/login'}><button  className="btn btn-ghost text-xl">Login</button></Link>
+                    {
+                        user?.email ? <>
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li><button onClick={() => logOut()}  className="btn btn-ghost text-xl">Log Out</button></li>
+                                </ul>
+                            </div>
+                        </> :
+                            <Link to={'/login'}><button className="btn btn-ghost text-xl">Login</button></Link>
+                    }
+
                 </div>
             </div>
 
 
-        </Container>
+        </Container >
     );
 };
 
