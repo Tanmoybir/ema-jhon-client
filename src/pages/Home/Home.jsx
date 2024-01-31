@@ -1,9 +1,12 @@
-
+import Container from "../../components/util/Container";
+import AllProducts from "./AllProducts";
+import HomeSlider from "./HomeSlider";
 const Home = () => {
     return (
-        <div>
-            <h1>Home</h1>
-        </div>
+        <Container>
+            <HomeSlider/>
+           <AllProducts/>
+        </Container>
     );
 };
 
