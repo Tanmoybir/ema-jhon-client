@@ -1,7 +1,7 @@
 import axios from "axios";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase.config";
-// import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -16,16 +16,10 @@ const useAxios = () => {
         return response;
     },  (error) => {
         if (error.response.status === 401 || error.response.status === 403) {
-            // logOut()
-            //     .then(() => {
-            //         navigate('/login')
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //     })
+            
             signOut(auth)
             .then(() => {
-                // navigate('/login')
+                
             }).catch((err) => {
                 console.log(err.message);
             })

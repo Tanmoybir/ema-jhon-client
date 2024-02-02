@@ -4,6 +4,7 @@ import { auth } from "../config/firebase.config";
 import { PropTypes } from "prop-types";
 import useAxios from "../hooks/useAxios"
 
+
 export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
@@ -42,32 +43,32 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             const userEmail = currentUser?.email || user?.email
-            const loggedUser = { email: userEmail}
+            const loggedUser = { email: userEmail }
             setUser(currentUser)
             setLoading(false)
-            
-            
-           if(currentUser){
-            axios.post('/auth/create-token', loggedUser)
-            .then(res => {
-                if(res.data.success){
-                    console.log(res.data.success);
-                }else{
-                    logOut()
-                }
-            })
-           }else{
-            axios.post('/auth/remove-token', loggedUser)
-            .then(res => {
-                console.log(res.data);
-            })
-           }
+
+
+            if (currentUser) {
+                axios.post('/auth/create-token', loggedUser)
+                    .then(res => {
+                        if (res.data.success) {
+                            console.log(res.data.success);
+                        } else {
+                            logOut()
+                        }
+                    })
+            } else {
+                axios.post('/auth/remove-token', loggedUser)
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            }
         })
         return () => {
             unsubscribe()
 
         }
-    }, [axios,user])
+    }, [axios, user])
 
 
 
